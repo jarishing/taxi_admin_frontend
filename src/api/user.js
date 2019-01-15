@@ -56,3 +56,34 @@ export const unbanUser = async( userId ) => {
 
     return result.data;
 };
+
+export const setDriverClass = async( userId, driverClass ) => {
+    let AccessToken =  getAccessToken();
+
+    let{ data: result } = await axios.put(
+        `${baseUrl}/user/setgrade/${userId}`,{ grade: driverClass },
+        {headers: {Authorization: `Bearer ${AccessToken}`}}
+    );
+
+    return result.data;
+};
+
+export const vaildDriver = async( userId ) => {
+    let AccessToken =  getAccessToken();
+
+    let{ data: result } = await axios.put(
+        `${baseUrl}/user/valid/${userId}`,{},
+        {headers: {Authorization: `Bearer ${AccessToken}`}}
+    );
+
+    return result.data;
+}
+
+export const deleteDriverAccount = async( userId ) => {
+    let AccessToken =  getAccessToken();
+
+    return await axios.delete(
+        `${baseUrl}/user/${userId}`,
+        {headers: {Authorization: `Bearer ${AccessToken}`}}
+    );
+};

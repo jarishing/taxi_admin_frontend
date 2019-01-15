@@ -6,10 +6,13 @@ const Model = function () {
         let Order = await api.order.getOrder( orderId ),
             result = { ... this.state },
             distance;
+
+        console.log( Order );
     
         distance = Order.criteria.distance / 1000;
         distance = distance.toFixed(1);
         
+        result.id = Order.orderId;
         result.start = Order.start.address;
         result.end = Order.end.address;
         result.detail = Order.criteria;

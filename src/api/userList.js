@@ -5,6 +5,9 @@ import { getAccessToken } from '../store';
 export const getUserList = async ( userType, searchType ) => {
     let AccessToken =  getAccessToken();
     
+    if( !userType )
+        userType = '';
+
     let { data: result } = await axios.get(
         `${baseUrl}/user/?user=${userType}&type=${searchType}`,
         {headers: {Authorization: `Bearer ${AccessToken}`}}
@@ -12,3 +15,4 @@ export const getUserList = async ( userType, searchType ) => {
 
     return result.data;
 }
+

@@ -9,6 +9,7 @@ class OrderDetail extends Component {
     constructor(props){
         super(props);
         this.state = {
+            id: null,
             start: null,
             end: null,
             detail: null,

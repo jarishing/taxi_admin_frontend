@@ -3,20 +3,42 @@ import moment from 'moment';
 
 const Model = function () {
 
-    const getData = async() =>{
-        let update = await api.analysis.getDataPage(),
-            data = await api.analysis.getData('data'),
+    const getData = async( filter ) =>{
+        // let update = await api.analysis.getDataPage();
+        
+        let data = await api.analysis.getData('data', filter ),
             result = {... this.state };
+
+        result.loading = true; 
+        await this.setState( result );
 
         result.startData= data.start;
         result.endData = data.end;
         result.discountData = data.discount;
         result.timerange = data.time;
+
+        if( !filter ){
+            result.filter = false;
+        }else{
+            result.filter = true;
+        }
         result.loading = false;
         return this.setState( result );
     };
 
-    return { getData };
+    const onChange = async( e ) =>{
+        let result = { ...this.state };
+        result.filterTime = e.target.value;
+        return this.setState( result );
+    };
+
+    const onCancel = async() => {
+        let result = { ...this.state };
+        result.filterTime = null;
+        return this.setState( result );
+    }
+
+    return { getData, onChange, onCancel };
 };
 
 export default Model;

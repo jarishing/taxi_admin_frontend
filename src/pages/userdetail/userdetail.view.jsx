@@ -43,7 +43,7 @@ export default( props ) => {
                                     電郵地址:
                                 </div>
                                 <div className="detail-page-data">
-                                    { props.UserData.email }
+                                    { props.UserData.data? props.UserData.data.email:"沒有提供" }
                                 </div>
                             </div>
                             <div className="detail-page-data-item">
@@ -52,21 +52,21 @@ export default( props ) => {
                                 </div>
                                 <div className="detail-page-data">
                                     {
-                                        props.UserData.valid?
-                                        <Badge status="processing" text="正常"/>:
-                                        <Badge status="error" text="禁止中" />
+                                        props.UserData.ban?
+                                        <Badge status="error" text="禁止中" />:
+                                        <Badge status="processing" text="正常"/>
                                     }
                                 </div>
                             </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-button-wrapper">
                                     {
-                                        props.UserData.valid?
-                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
-                                            <Icon type="stop" /> 禁止
-                                        </div>:
+                                        props.UserData.ban?
                                         <div className="detail-page-release-button" onClick={() => props.unbanUser(props.userId)}>
                                             <Icon type="check" /> 解除
+                                        </div>:
+                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
+                                            <Icon type="stop" /> 禁止
                                         </div>
                                     }
                                 </div>
@@ -98,6 +98,7 @@ export default( props ) => {
                                     type="Order"
                                     key={index}
                                     orderId={ item._id }
+                                    orderShowingId = { item.orderId }
                                     status={ item.status }
                                     start={ item.start.address }
                                     end={ item.end.address }

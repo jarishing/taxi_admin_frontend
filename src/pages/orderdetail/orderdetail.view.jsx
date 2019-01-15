@@ -4,16 +4,18 @@ import styled           from 'styled-components';
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
 
-import { Icon, Badge }         from 'antd';
+import { Icon , Badge }         from 'antd';
 
 export default( props ) => {
+    console.log("======orderDetail==========");
+    console.log(props);
     return (
         <div style={{width: '100%', height:'100%'}}>
             <Header/>
             <DetailPage>
                 <div className="detail-page-title-row">
                     <div className="detail-page-title" onClick={() => console.log(props)}>
-                        訂單資料
+                        訂單資料 
                     </div>
                 </div>
                 <div className="detail-page-main-row">
@@ -23,6 +25,14 @@ export default( props ) => {
                             <Icon type="loading" />
                         </div>:
                         <div className="detail-page-main">
+                            <div className="detail-page-data-item">
+                                <div className="detail-page-data-title">
+                                    訂單編號:
+                                </div>
+                                <div className="detail-page-data">
+                                    { props.id }
+                                </div>
+                            </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-data-title">
                                     起始點:
@@ -117,6 +127,10 @@ export default( props ) => {
                     props.loading?
                         <div className="detail-page-item-loading">
                             <Icon type="loading" />
+                        </div>:
+                    !props.user?
+                        <div className="detail-page-item-loading">
+                            User has been deleted
                         </div>:
                     props.user.type == "driver"?
                         <Item

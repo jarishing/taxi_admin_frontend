@@ -4,7 +4,8 @@ import styled           from 'styled-components';
 import { Badge, Icon, Rate } from 'antd';
 
 export default( props ) => {
-    console.log( props );
+    // console.log("=============item=============");
+    // console.log(props);
     switch(props.type){
         case 'User':
             return(
@@ -15,12 +16,12 @@ export default( props ) => {
                                 { props.username }
                             </div>
                             <div className="item-body-data-email">
-                                { props.email }
+                                { props.data? props.data.email:null }
                             </div>
                         </div>
                         <div className="item-body-status">
                             {
-                                !props.valid?
+                                props.ban?
                                 <Badge status="error" text="禁止中" />:
                                 props.online?
                                 <Badge status="success" text="在線中" />:
@@ -54,11 +55,13 @@ export default( props ) => {
                                 </div>
                                 <div className="item-body-driver-status-wrapper">
                                     {
+                                        props.ban?
+                                            <Badge status="error" text="禁止中" />:
                                         !props.valid?
-                                        <Badge status="error" text="禁止中" />:
+                                            <Badge status="error" text="審批中" />:
                                         props.online?
-                                        <Badge status="success" text="在線中" />:
-                                        <Badge status="processing" text="正常" />
+                                            <Badge status="success" text="在線中" />:
+                                            <Badge status="processing" text="正常" />
                                     }
                                 </div>
                             </div>
@@ -70,6 +73,9 @@ export default( props ) => {
             return(
                 <ItemLarge onClick={() => props.onOrderItemClick( props.orderId )}>
                     <div className="item-body">
+                        <div className="item-body-id">
+                            訂單編號: {props.orderShowingId}
+                        </div>
                         <div className="item-body-main-wrapper">
                             <div className="item-body-main-list">
                                 <div className="item-body-main-side">
@@ -158,6 +164,11 @@ const ItemLarge = styled.div`
         width: 100%;
         height: 100%;
 
+        &> .item-body-id{
+            font-size: 2.5vh;
+            padding-bottom: 1vh;
+        }
+
         &> .item-body-comment-main-wrapper{
             padding-bottom: 2vh;
             height: 78%;
@@ -184,7 +195,7 @@ const ItemLarge = styled.div`
 
         &> .item-body-main-wrapper{
             padding-bottom: 2vh;
-            height: 78%;
+            height: 60%;
 
             &> .item-body-main-list{
                 height: 50%;

@@ -9,8 +9,8 @@ import { Icon, Select }         from 'antd';
 const Option = Select.Option;
 
 export default( props ) => {
-
     const orderList = props.orderList;
+    console.log( orderList );
 
     return (
         <div style={{width: '100%', height:'100%'}}>
@@ -45,6 +45,7 @@ export default( props ) => {
                                         type="Order"
                                         key={index}
                                         orderId={ item._id }
+                                        orderShowingId = { item.orderId }
                                         status={ item.status }
                                         start={ item.start.address }
                                         end={ item.end.address }

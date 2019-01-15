@@ -1,5 +1,7 @@
 import api from '../../api';
 
+import { imageUrl }      from '../../constant/base';
+
 const Model = function () {
 
     const getData = async( userId ) =>{
@@ -33,7 +35,39 @@ const Model = function () {
         return this.setState( result );
     }
 
-    return { getData, banUser, unbanUser };
+    const openImage = async( link ) => {
+        window.open(`${imageUrl}/image/${link}`);
+    }
+
+    const setDriverClass = async ( value ) => {
+        let UserData = await api.user.setDriverClass( this.props.userId, value ),
+            result = { ... this.state };
+
+        result.UserData = UserData;
+        return this.setState( result );
+    }
+
+    const vaildDriver = async () => {
+        let UserData = await api.user.vaildDriver( this.props.userId ),
+            result = { ... this.state };
+
+        result.UserData = UserData;
+        return this.setState( result );
+    }
+
+    const troggleConfirmModel = async() => {
+        let result = { ... this.state };
+
+        result.visible = !result.visible;
+        return this.setState( result );
+    }
+
+    const delteDriverAccount = async( ) => {
+        await api.user.deleteDriverAccount( this.props.userId );
+        return this.props.history.push('/Driver');
+    }
+
+    return { getData, banUser, unbanUser, openImage, setDriverClass, vaildDriver, troggleConfirmModel, delteDriverAccount };
 };
 
 export default Model;

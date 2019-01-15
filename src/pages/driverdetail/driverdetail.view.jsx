@@ -4,11 +4,11 @@ import styled           from 'styled-components';
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
 
-import { Icon, Badge }         from 'antd';
+import { Icon, Badge, Select, Modal }         from 'antd';
 
+const Option = Select.Option;
 
 export default( props ) => {
-    console.log( props);
     return (
         <div style={{width: '100%', height:'100%'}}>
             <Header/>
@@ -22,6 +22,22 @@ export default( props ) => {
                     {
                         props.UserData?
                         <div className="detail-page-main">
+                            <div className="detail-page-class-selector">
+                                <Select 
+                                    defaultValue={ props.UserData.superClass? "super":props.UserData.grade}
+                                    style={{ width: '20vh',
+                                        fontSize: '2vh',
+                                        marginTop: '1vh' }}
+                                    onChange={ props.setDriverClass }
+                                >
+                                    <Option value="S">最優先</Option>
+                                    <Option value="A">A class</Option>
+                                    <Option value="B">B class</Option>
+                                    <Option value="C">C class</Option>
+                                    <Option value="D">D class</Option>
+                                    <Option value="E">E class</Option>
+                                </Select>
+                            </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-data-title">
                                     名稱:
@@ -48,10 +64,17 @@ export default( props ) => {
                             </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-data-title">
-                                    的士編號:
+                                    的士車牌編號:
                                 </div>
                                 <div className="detail-page-data">
-                                    { props.UserData.taxi_driver_id_no }
+                                    { 
+                                        <div 
+                                            className="detail-page-data-image"
+                                            onClick={() => props.openImage( props.UserData.taxi_driver_id_photo )}
+                                        >
+                                            按此查看
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div className="detail-page-data-item">
@@ -59,7 +82,11 @@ export default( props ) => {
                                     評價:
                                 </div>
                                 <div className="detail-page-data">
-                                    { props.UserData.grade }({ props.UserData.mark })
+                                    { 
+                                        props.UserData.grade == 'S'?
+                                        "最優先":
+                                        props.UserData.grade 
+                                    }({ props.UserData.mark })
                                 </div>
                             </div>
                             <div className="detail-page-data-item">
@@ -68,21 +95,32 @@ export default( props ) => {
                                 </div>
                                 <div className="detail-page-data">
                                     {
+                                        props.UserData.ban?
+                                        <Badge status="error" text="禁止中" />:
                                         props.UserData.valid?
                                         <Badge status="processing" text="正常"/>:
-                                        <Badge status="error" text="禁止中" />
+                                        <Badge status="error" text="待審批中" />
                                     }
                                 </div>
                             </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-button-wrapper">
                                     {
-                                        props.UserData.valid?
-                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
-                                            <Icon type="stop" /> 禁止
+                                        !props.UserData.valid?
+                                        <div className="detail-page-valid-button-group">
+                                            <div className="detail-page-nonvalid-button" onClick={() => props.troggleConfirmModel()}>
+                                                <Icon type="stop" /> 不通過審批
+                                            </div>
+                                            <div className="detail-page-valid-button" onClick={() => props.vaildDriver()}>
+                                                <Icon type="check" /> 通過審批
+                                            </div>
                                         </div>:
+                                        props.UserData.ban?
                                         <div className="detail-page-release-button" onClick={() => props.unbanUser(props.userId)}>
                                             <Icon type="check" /> 解除
+                                        </div>:
+                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
+                                            <Icon type="stop" /> 禁止
                                         </div>
                                     }
                                 </div>
@@ -114,6 +152,7 @@ export default( props ) => {
                                     type="Order"
                                     key={index}
                                     orderId={ item._id }
+                                    orderShowingId = { item.orderId }
                                     status={ item.status }
                                     start={ item.start.address }
                                     end={ item.end.address }
@@ -155,9 +194,21 @@ export default( props ) => {
                     </div>
                 }
             </DetailPage>
+            <Modal
+                title="審批確定"
+                visible={ props.visible }
+                onOk={ () => props.delteDriverAccount() }
+                onCancel={ () => props.troggleConfirmModel() }
+                >
+                <p>是否不通過此司機的審批?</p>
+            </Modal>
         </div>
     )
 };
+
+const ImageViewer =styled.div`
+
+`
 
 
 const DetailPage = styled.div`
@@ -171,7 +222,7 @@ const DetailPage = styled.div`
 
     &> .detail-page-main-row{
         margin: 2.5vh;
-        height: 37vh;
+        height: 50vh;
         background-color: #FFF;
         box-shadow: 0 1px 3px rgba(0,0,0,.55);
 
@@ -189,10 +240,16 @@ const DetailPage = styled.div`
             width: 100%;
             height: 100%;
 
+            &> .detail-page-class-selector{
+                display: flex;
+                justify-content: flex-end;
+            }
+
             &> .detail-page-data-item{
                 display: flex;
                 font-size: 2.5vh;
                 padding-bottom: 0.8vh;
+                align-items: center
                 
                 &> .detail-page-data-title{
                     margin-right: 2vw;
@@ -215,12 +272,40 @@ const DetailPage = styled.div`
                             margin-left: 1.3vh;
                         }
                     }
+
+                    &> .detail-page-data-image{
+                        padding: 1vh 1.5vh 1vh 1vh;
+                        font-size: 2.5vh;
+                        border: 1px solid darkgray;
+                        color: darkgray;
+                        margin: 2vh;
+                    }
                 }
 
                 &> .detail-page-button-wrapper{
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
+
+                    &> .detail-page-valid-button-group{
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+
+                        &> .detail-page-nonvalid-button{
+                            padding: 1vh 1.5vh 1vh 1vh;
+                            font-size: 2.5vh;
+                            border: 1px solid crimson;
+                            color: crimson;
+                        }
+
+                        &> .detail-page-valid-button{
+                            padding: 1vh 1.5vh 1vh 1vh;
+                            font-size: 2.5vh;
+                            border: 1px solid seagreen;
+                            color: seagreen;
+                        }
+                    }
 
                     &> .detail-page-ban-button{
                         padding: 1vh 1.5vh 1vh 1vh;

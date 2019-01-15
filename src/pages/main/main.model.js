@@ -7,14 +7,23 @@ const Model = function () {
         let data = await api.analysis.getData('main');
         let result = { ... this.state };
 
+        console.log( data );
+
         result.activeUser = data.activeDriver;
         result.activeDriver = data.activeDriver;
         result.ordering = data.ordering;
-        result.mostPopularStart = data.analysisData.mostPopularStart.district? data.analysisData.mostPopularStart.district:null;
-        result.mostPopularEnd = data.analysisData.mostPopularEnd.district? data.analysisData.mostPopularEnd.district:null;
-        let averageDistance = data.analysisData.averageDistance / 1000;
+        // result.mostPopularStart = data.analysisData.mostPopularStart.district? data.analysisData.mostPopularStart.district:null;
+        // result.mostPopularEnd = data.analysisData.mostPopularEnd.district? data.analysisData.mostPopularEnd.district:null;
+        // let averageDistance = data.analysisData.averageDistance / 1000;
+        // result.averageDistance = averageDistance.toFixed(2);
+        // result.mostPopulatTime = data.analysisData.mostPopularTime.timeRange? data.analysisData.mostPopularTime.timeRange:null;
+
+
+        result.mostPopularStart = data.analysisData.mostPopularStart? data.analysisData.mostPopularStart.district:null;
+        result.mostPopularEnd = data.analysisData.mostPopularEnd? data.analysisData.mostPopularEnd.district:null;
+        let averageDistance = data.analysisData.averageDistance? data.analysisData.averageDistance / 1000: 0;
         result.averageDistance = averageDistance.toFixed(2);
-        result.mostPopulatTime = data.analysisData.mostPopularTime.timeRange? data.analysisData.mostPopularTime.timeRange:null;
+        result.mostPopulatTime = data.analysisData.mostPopularTime? data.analysisData.mostPopularTime.timeRange:null;
         
         return this.setState( result );
     };

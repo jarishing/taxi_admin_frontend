@@ -76,8 +76,8 @@ class Routes extends React.Component {
 
             <BrowserRouter>
                 <div style={{width: '100%', height:'100%'}}>
+                    <Route path="/" exact component={Login}/>
                     <AutoLogin { ... this.props } />
-                    <Route path="/login" component={Login}/>
                 </div>
             </BrowserRouter>
         )

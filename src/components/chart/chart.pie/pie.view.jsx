@@ -10,10 +10,29 @@ export default( props ) => {
             <div className="pie-title">
                 {props.title}
             </div>
-            <Doughnut data={props.data} />
+            <div className="pie-container-wrapper">
+                <Doughnut 
+                    data={props.data}
+                    options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                            labels: {
+                                fontSize: '12'
+                            }
+                        }
+                    }}
+                />
+            </div>
         </PIE>
     )
 };
+
+// <Doughnut 
+//                 data={props.data}
+//             />
 
 const PIE = styled.div`
     margin: 2.5vh;
@@ -26,6 +45,14 @@ const PIE = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 3vh;
-        padding: 2vh 0;
+        padding-top: 2vh;
+    }
+
+    &> .pie-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 29vh;
+        width: 100%;
     }
 `

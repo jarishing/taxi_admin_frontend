@@ -4,11 +4,15 @@ import {connect} from 'react-redux';
 import View from './driverdetail.view';
 import Model from './driverdetail.model';
 
+import {withRouter} from 'react-router-dom';
+
 class DriverDetail1 extends Component {
 
     constructor(props){
         super(props);
         this.state = {
+            open: false,
+            visible: false
         }
         this.model = Model.bind(this)();
     }
@@ -31,11 +35,11 @@ class DriverDetail1 extends Component {
 
 const mapStateToProps = ( state, ownProps ) => ({
     userId : state.searchReducer.userId
-    // userId: "5bfd4b948f5e8a4097681f8d"
+    // userId: "5c346c0db322f711cf9cceed"
 });
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ({
     
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )(DriverDetail1);
+export default withRouter( connect( mapStateToProps, mapDispatchToProps )(DriverDetail1));

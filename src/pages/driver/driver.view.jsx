@@ -29,6 +29,8 @@ export default( props ) => {
                     >
                         <Option value="active">在線司機</Option>
                         <Option value="all">所有司機</Option>
+                        <Option value="nonVaild">待審批</Option>
+                        <Option value="banned">已封鎖</Option>
                     </Select>
                 </div>
                 <div className="user-page-main">
@@ -76,6 +78,8 @@ const UserPage = styled.div`
         left: 0;
         right: 0;
         overflow: scroll;
+
+        
 
         &> .user-page-main-empty{
             width: 100%;
