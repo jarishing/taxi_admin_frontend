@@ -40,7 +40,7 @@ function AutoLogin( props ){
     }else{
         return <Redirect 
             to={{
-                pathname: "/login",
+                pathname: "/",
                 state: { from: props.location }
             }}
         />
