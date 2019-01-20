@@ -5,9 +5,14 @@ const Model = function () {
 
     const getData = async( filter ) =>{
         // let update = await api.analysis.getDataPage();
+        let data;
+
+        if( filter == "now")
+            data = await api.analysis.getData('now', null );
+        else
+            data = await api.analysis.getData('data', filter );
         
-        let data = await api.analysis.getData('data', filter ),
-            result = {... this.state };
+        let result = {... this.state };
 
         result.loading = true; 
         await this.setState( result );
@@ -17,7 +22,7 @@ const Model = function () {
         result.discountData = data.discount;
         result.timerange = data.time;
 
-        if( !filter ){
+        if( !filter || filter == "all" ){
             result.filter = false;
         }else{
             result.filter = true;

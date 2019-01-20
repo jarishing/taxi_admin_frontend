@@ -21,7 +21,10 @@ export default( props ) => {
                 <div className="menu-selector">
                     <RadioGroup  onChange={props.onChange} value={props.value}>
                         <div className="menu-selector-item">
-                            <Radio style={radioStyle} value={"all"}>ALL</Radio>
+                            <Radio style={radioStyle} value={"now"}>現時訂單</Radio>
+                        </div>
+                        <div className="menu-selector-item">
+                            <Radio style={radioStyle} value={"all"}>所有已完成訂單</Radio>
                         </div>
                         <div className="menu-selector-item">
                             <Radio style={radioStyle} value={0}>00:00 ~ 01:00</Radio>
@@ -141,7 +144,8 @@ export default( props ) => {
                 props.value == 21? "21:00 ~ 22:00":
                 props.value == 22? "22:00 ~ 23:00":
                 props.value == 23? "23:00 ~ 00:00":
-                "ALL"
+                props.value == "now"? "現時訂單":
+                "所有已完成訂單"
             }
             <Icon type="caret-down" />
         </Menu>

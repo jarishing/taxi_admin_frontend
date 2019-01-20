@@ -3,6 +3,11 @@ import api from '../../api';
 const Model = function () {
 
     const getData = async( userId ) =>{
+        if(!userId){
+            let url = new URL(window.location.href);
+            userId = url.searchParams.get("userId"); 
+        }
+
         let UserData = api.user.getUser( userId ),
             UserOrder = api.user.getUserOrder( userId ),
             UserComment = api.user.getUserCommemt( userId ),

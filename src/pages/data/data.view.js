@@ -34,6 +34,8 @@ export default( props ) => {
                             />
                         </div>
                         {
+                            !props.startData.startData && !props.startData.startLabel?
+                            <Empty> No Data </Empty>:
                             props.startData.startData.length == 0 && props.startData.startLabel.length == 0?
                             <Empty> No Data </Empty>:
                             <Pie 
@@ -43,6 +45,8 @@ export default( props ) => {
                             />
                         }
                         {
+                            !props.endData.endData&&!props.endData.endLabel?
+                            <Empty> No Data </Empty>:
                             props.endData.endData.length == 0 && props.endData.endLabel.length == 0?
                             <Empty> No Data </Empty>:
                             <Pie 
@@ -52,6 +56,8 @@ export default( props ) => {
                             />
                         }
                         {
+                            !props.discountData.discountData&& !props.discountData.discountLabel?
+                            <Empty> No Data </Empty>:
                             props.discountData.discountData.length == 0 && props.discountData.discountLabel.length == 0?
                             <Empty> No Data </Empty>:
                             <Pie 
@@ -63,6 +69,8 @@ export default( props ) => {
                         {
                             props.filter?
                             null:
+                            !props.timerange.timeData&&!props.timerange.timeLabel?
+                            <Empty> No Data </Empty>:
                             props.timerange.timeData.length == 0 && props.timerange.timeLabel.length == 0?
                             <Empty> No Data </Empty>:
                             <Pie 
@@ -103,6 +111,7 @@ const Empty = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 40px;
 `
 
 const MainPage = styled.div`

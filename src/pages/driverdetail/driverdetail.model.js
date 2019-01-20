@@ -5,6 +5,11 @@ import { imageUrl }      from '../../constant/base';
 const Model = function () {
 
     const getData = async( userId ) =>{
+        if(!userId){
+            let url = new URL(window.location.href);
+            userId = url.searchParams.get("driverId"); 
+        }
+        
         let UserData = api.user.getUser( userId ),
             UserOrder = api.user.getUserOrder( userId ),
             UserComment = api.user.getUserCommemt( userId ),

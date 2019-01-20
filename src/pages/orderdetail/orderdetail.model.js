@@ -3,6 +3,11 @@ import api from '../../api';
 const Model = function () {
 
     const getData = async( orderId ) => {
+        if(!orderId){
+            let url = new URL(window.location.href);
+            orderId = url.searchParams.get("orderId"); 
+        }
+
         let Order = await api.order.getOrder( orderId ),
             result = { ... this.state },
             distance;
