@@ -18,14 +18,14 @@ class Data extends Component {
             loading: true,
 
             filter: false,
-            filterTime: null
+            filterTime: "now"
         }
         this.model = Model.bind(this)();
 
     }
 
     componentDidMount(){
-        this.model.getData( null );
+        this.model.getData( "now" );
     }
 
     render(){
