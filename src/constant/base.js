@@ -1,4 +1,4 @@
 export const baseUrl = 'https://taxi.ngrok.kenyip.cc/api';
-export const imageUrl = 'https://taxi.ngrok.kenyip.cc/image';
+export const imageUrl = 'https://taxi.ngrok.kenyip.cc';
 // export const baseUrl = 'http://localhost:3100/api';
-// export const imageUrl = 'http://localhost:3100/image';
+// export const imageUrl = 'http://localhost:3100';
