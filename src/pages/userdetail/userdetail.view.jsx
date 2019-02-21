@@ -62,10 +62,10 @@ export default( props ) => {
                                 <div className="detail-page-button-wrapper">
                                     {
                                         props.UserData.ban?
-                                        <div className="detail-page-release-button" onClick={() => props.unbanUser(props.userId)}>
+                                        <div className="detail-page-release-button" onClick={() => props.unbanUser(props.UserData._id)}>
                                             <Icon type="check" /> 解除
                                         </div>:
-                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
+                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.UserData._id)}>
                                             <Icon type="stop" /> 禁止
                                         </div>
                                     }

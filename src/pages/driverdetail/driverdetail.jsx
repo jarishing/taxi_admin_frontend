@@ -12,7 +12,8 @@ class DriverDetail1 extends Component {
         super(props);
         this.state = {
             open: false,
-            visible: false
+            visible: false,
+            class: null
         }
         this.model = Model.bind(this)();
     }

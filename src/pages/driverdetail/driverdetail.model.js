@@ -20,9 +20,21 @@ const Model = function () {
         result.UserData = UserData;
         result.UserOrder = UserOrder;
         result.UserComment = UserComment;
-
+        result.class = UserData.grade;
         return this.setState( result );
     };
+
+    const setClassType = async( classType ) => {
+        let result = { ... this.state };
+        result.class = classType;
+        return this.setState( result );
+    };
+
+    const onCancel = async( classType )=> {
+        let result = { ... this.state };
+        result.class = classType;
+        return this.setState( result );
+    }
 
     const banUser = async( userId ) => {
         let UserData = await api.user.banUser( userId ),
@@ -45,7 +57,9 @@ const Model = function () {
     }
 
     const setDriverClass = async ( value ) => {
-        let UserData = await api.user.setDriverClass( this.props.userId, value ),
+        console.log(value);
+        console.log(this.state);
+        let UserData = await api.user.setDriverClass( this.state.UserData._id, value ),
             result = { ... this.state };
 
         result.UserData = UserData;
@@ -53,7 +67,7 @@ const Model = function () {
     }
 
     const vaildDriver = async () => {
-        let UserData = await api.user.vaildDriver( this.props.userId ),
+        let UserData = await api.user.vaildDriver( this.state.UserData._id ),
             result = { ... this.state };
 
         result.UserData = UserData;
@@ -68,11 +82,11 @@ const Model = function () {
     }
 
     const delteDriverAccount = async( ) => {
-        await api.user.deleteDriverAccount( this.props.userId );
+        await api.user.deleteDriverAccount( this.state.UserData._id );
         return this.props.history.push('/Driver');
     }
 
-    return { getData, banUser, unbanUser, openImage, setDriverClass, vaildDriver, troggleConfirmModel, delteDriverAccount };
+    return { getData, setClassType,  onCancel, banUser, unbanUser, openImage, setDriverClass, vaildDriver, troggleConfirmModel, delteDriverAccount };
 };
 
 export default Model;

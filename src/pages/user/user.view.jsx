@@ -3,10 +3,7 @@ import styled           from 'styled-components';
 
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
-
-import { Icon, Select }         from 'antd';
-
-const Option = Select.Option;
+import DropMenu         from '../../components/dropMenuDriver/dropMenuDriver';
 
 export default( props ) => {
 
@@ -20,16 +17,16 @@ export default( props ) => {
                     <div className="user-page-title">
                         用戶列表
                     </div>
-                    <Select 
-                        defaultValue="active" 
-                        style={{ width: '16vh',
-                        fontSize: '2vh',
-                        marginTop: '1vh' }}
-                        onChange={ props.getUserList }
-                    >
-                        <Option value="active">在線用戶</Option>
-                        <Option value="all">所有用戶</Option>
-                    </Select>
+                    <DropMenu
+                        padding={"1vh 2vh"}
+                        width={"50vw"}
+                        fontSize={"2.5vh"}
+                        type={'USER'}
+                        onChange={ props.setListType }
+                        onCancel={ props.onCancel }
+                        onSubmit={ props.getUserList }
+                        value={ props.searchtype }
+                    />
                 </div>
                 <div className="user-page-main">
                     {

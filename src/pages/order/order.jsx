@@ -10,7 +10,8 @@ class Order extends Component {
         super(props);
         this.state = {
             orderList: [],
-            listType: null
+            listType: null,
+            searchtype: 'new'
         }
         this.model = Model.bind(this)();
     }

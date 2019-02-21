@@ -8,11 +8,23 @@ const Model = function () {
         
         result.userList = data;
         result.listType = searchType;
+        result.searchtype = searchType;
         return this.setState( result );
-    }
+    };
 
+    const setListType = async( searchType ) => {
+        let result = { ... this.state };
+        result.searchtype = searchType;
+        return this.setState( result );
+    };
 
-    return { getUserList };
+    const onCancel = async( searchType ) =>{
+        let result = { ...this.state };
+        result.searchtype = searchType;
+        return this.setState( result );
+    };
+
+    return { getUserList, setListType, onCancel };
 };
 
 export default Model;

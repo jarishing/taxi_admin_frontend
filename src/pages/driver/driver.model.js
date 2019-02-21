@@ -13,10 +13,23 @@ const Model = function () {
         
         result.driverList = data;
         result.listType = searchType;
+        result.searchtype= searchType;
         return this.setState( result );
     };
 
-    return { getDriverList };
+    const setListType = async( searchType ) => {
+        let result = { ... this.state };
+        result.searchtype = searchType;
+        return this.setState( result );
+    }
+
+    const onCancel = async( searchType ) =>{
+        let result = { ...this.state };
+        result.searchtype = searchType;
+        return this.setState( result );
+    }
+
+    return { getDriverList, setListType, onCancel };
 };
 
 export default Model;

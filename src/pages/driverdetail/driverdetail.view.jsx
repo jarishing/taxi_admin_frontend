@@ -3,12 +3,15 @@ import styled           from 'styled-components';
 
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
+import DropMenu         from '../../components/dropMenuDriver/dropMenuDriver';
 
 import { Icon, Badge, Select, Modal }         from 'antd';
 
-const Option = Select.Option;
+
 
 export default( props ) => {
+    console.log("=======detail========");
+    console.log(props);
     return (
         <div style={{width: '100%', height:'100%'}}>
             <Header/>
@@ -23,20 +26,16 @@ export default( props ) => {
                         props.UserData?
                         <div className="detail-page-main">
                             <div className="detail-page-class-selector">
-                                <Select 
-                                    defaultValue={ props.UserData.superClass? "super":props.UserData.grade}
-                                    style={{ width: '20vh',
-                                        fontSize: '2vh',
-                                        marginTop: '1vh' }}
-                                    onChange={ props.setDriverClass }
-                                >
-                                    <Option value="S">最優先</Option>
-                                    <Option value="A">A class</Option>
-                                    <Option value="B">B class</Option>
-                                    <Option value="C">C class</Option>
-                                    <Option value="D">D class</Option>
-                                    <Option value="E">E class</Option>
-                                </Select>
+                                <DropMenu
+                                    padding={"1vh 2vh"}
+                                    width={"50vw"}
+                                    fontSize={"2.5vh"}
+                                    type={'CLASS'}
+                                    onChange={ props.setClassType }
+                                    onCancel={ props.onCancel }
+                                    onSubmit={ props.setDriverClass }
+                                    value={ props.class }
+                                />
                             </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-data-title">
@@ -116,10 +115,10 @@ export default( props ) => {
                                             </div>
                                         </div>:
                                         props.UserData.ban?
-                                        <div className="detail-page-release-button" onClick={() => props.unbanUser(props.userId)}>
+                                        <div className="detail-page-release-button" onClick={() => props.unbanUser(props.UserData._id)}>
                                             <Icon type="check" /> 解除
                                         </div>:
-                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.userId)}>
+                                        <div className="detail-page-ban-button" onClick={() => props.banUser(props.UserData._id)}>
                                             <Icon type="stop" /> 禁止
                                         </div>
                                     }

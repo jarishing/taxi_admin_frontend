@@ -1,23 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import View from './user.view';
-import Model from './user.model';
+import View from './dropMenuDriver.view';
+import Model from './dropMenuDriver.model';
 
-class User extends Component {
+class DropMenuDriver extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            userList: [],
-            listType: null,
-            searchtype: 'active'
+            open: false,
+            origin: props.value
         }
         this.model = Model.bind(this)();
-    }
-
-    componentDidMount(){
-        this.model.getUserList( 'active' );
     }
 
     render(){
@@ -36,7 +31,6 @@ const mapStateToProps = ( state, ownProps ) => ({
 });
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ({
-    
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )(User);
+export default connect( mapStateToProps, mapDispatchToProps )(DropMenuDriver);

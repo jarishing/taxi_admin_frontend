@@ -3,10 +3,7 @@ import styled           from 'styled-components';
 
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
-
-import { Icon, Select }         from 'antd';
-
-const Option = Select.Option;
+import DropMenu         from '../../components/dropMenuDriver/dropMenuDriver';
 
 export default( props ) => {
     const orderList = props.orderList;
@@ -20,20 +17,16 @@ export default( props ) => {
                     <div className="user-page-title" onClick={() => console.log(props)}>
                         訂單列表
                     </div>
-                    <Select 
-                        defaultValue="new" 
-                        style={{ width: '18vh',
-                            fontSize: '2vh',
-                            marginTop: '1vh' }}
-                        onChange={ props.getOrderList }
-                    >
-                        <Option value="new">等待中訂單</Option>
-                        <Option value="accepted">承接中訂單</Option>
-                        <Option value="canceled">已取消訂單</Option>
-                        <Option value="commented">已完成訂單</Option>
-                        <Option value="badOrder">已丟棄訂單</Option>
-                        <Option value="all">所有訂單</Option>
-                    </Select>
+                    <DropMenu
+                        padding={"1vh 2vh"}
+                        width={"50vw"}
+                        fontSize={"2.5vh"}
+                        type={'ORDER'}
+                        onChange={ props.setListType }
+                        onCancel={ props.onCancel }
+                        onSubmit={ props.getOrderList }
+                        value={ props.searchtype }
+                    />
                 </div>
                 <div className="user-page-main">
                     {

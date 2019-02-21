@@ -3,10 +3,9 @@ import styled           from 'styled-components';
 
 import Header           from '../../components/header/header';
 import Item             from '../../components/item/item';
-
-import { Icon, Select }         from 'antd';
-
-const Option = Select.Option;
+import DropMenu         from '../../components/dropMenuDriver/dropMenuDriver';
+// import { Icon, Select }         from 'antd';
+// const Option = Select.Option;
 
 export default( props ) => {
    
@@ -20,18 +19,16 @@ export default( props ) => {
                     <div className="user-page-title">
                         司機列表
                     </div>
-                    <Select 
-                        defaultValue="active" 
-                        style={{ width: '16vh',
-                            fontSize: '2vh',
-                            marginTop: '1vh' }}
-                            onChange={ props.getDriverList }
-                    >
-                        <Option value="active">在線司機</Option>
-                        <Option value="all">所有司機</Option>
-                        <Option value="nonVaild">待審批</Option>
-                        <Option value="banned">已封鎖</Option>
-                    </Select>
+                    <DropMenu
+                        padding={"1vh 2vh"}
+                        width={"50vw"}
+                        fontSize={"2.5vh"}
+                        type={'DRIVER'}
+                        onChange={ props.setListType }
+                        onCancel={ props.onCancel }
+                        onSubmit={ props.getDriverList }
+                        value={ props.searchtype }
+                    />
                 </div>
                 <div className="user-page-main">
                 {

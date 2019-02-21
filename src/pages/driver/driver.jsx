@@ -10,7 +10,8 @@ class Driver extends Component {
         super(props);
         this.state = {
             driverList: [],
-            listType: null
+            listType: null,
+            searchtype: 'active'
         }
         this.model = Model.bind(this)();
     }
