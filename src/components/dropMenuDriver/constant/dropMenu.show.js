@@ -17,7 +17,8 @@ const dropMenuShow = function(){
             new:'等待中訂單',
             accepted: '承接中訂單',
             canceled: '已取消訂單',
-            commented: '已完成訂單',
+            confirmed: '已完成訂單',
+            commented: '已評價訂單',
             badOrder: '已丟棄訂單' ,
             all: '所有訂單'
         },

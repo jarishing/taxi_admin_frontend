@@ -11,16 +11,15 @@ export default( props ) => {
                 <div className="header-title" onClick={() => props.onClickMain()}>Taxi</div>
             </div>
             <Drawer
-                title="Hi, admin"
                 placement="left"
                 closable={false}
                 onClose={props.triggleDrawer}
                 visible={props.visible}
             >
-                <p style={{fontSize: '3vh'}} onClick={() => props.onUserClick()}><Icon type="user" style={{marginRight: '10px'}}/>User</p>
-                <p style={{fontSize: '3vh'}} onClick={() => props.onDriverClick()}><Icon type="car" style={{marginRight: '10px'}}/>Driver</p>
-                <p style={{fontSize: '3vh'}} onClick={() => props.onOrderClick()}><Icon type="solution" style={{marginRight: '10px'}}/>Order</p>
-                <p style={{fontSize: '3vh'}} onClick={() => props.onDataClick()}><Icon type="database" style={{marginRight: '10px'}}/>Data</p>
+                <p style={{fontSize: '4vh'}} onClick={() => props.onUserClick()}><Icon type="user" style={{marginRight: '10px'}}/>用家列表</p>
+                <p style={{fontSize: '4vh'}} onClick={() => props.onDriverClick()}><Icon type="car" style={{marginRight: '10px'}}/>司機列表</p>
+                <p style={{fontSize: '4vh'}} onClick={() => props.onOrderClick()}><Icon type="solution" style={{marginRight: '10px'}}/>訂單列表</p>
+                <p style={{fontSize: '4vh'}} onClick={() => props.onDataClick()}><Icon type="database" style={{marginRight: '10px'}}/>數據</p>
             </Drawer>
         </Header>
     )

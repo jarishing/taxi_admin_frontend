@@ -18,7 +18,8 @@ const dropMenuOption = function(){
             { value: 'new', label: '等待中訂單' },
             { value: 'accepted', label: '承接中訂單' },
             { value: 'canceled', label: '已取消訂單'},
-            { value: 'commented', label: '已完成訂單'},
+            { value: 'confirmed', label: '已完成訂單'},
+            { value: 'commented', label: '已評價訂單'},
             { value: 'badOrder', label: '已丟棄訂單' },
             { value: 'all', label: '所有訂單' }
         ],

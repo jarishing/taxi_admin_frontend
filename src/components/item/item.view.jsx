@@ -120,8 +120,10 @@ export default( props ) => {
                                     <Badge status="warning" text="承接中"/>:
                                     props.status == "canceled"?
                                     <Badge status="error" text="已取消" />:
-                                    props.status == "commented"?
+                                    props.status == "confirmed"?
                                     <Badge status="processing" text="已完成" />:
+                                    props.status == "commented"?
+                                    <Badge status="processing" text="已評價" />:
                                     <Badge status="default" text="已丟棄" />
                                 }
                             </div>
