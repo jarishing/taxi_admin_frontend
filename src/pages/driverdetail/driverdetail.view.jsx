@@ -63,7 +63,7 @@ export default( props ) => {
                             </div>
                             <div className="detail-page-data-item">
                                 <div className="detail-page-data-title">
-                                    的士車牌編號:
+                                    的士車牌證:
                                 </div>
                                 <div className="detail-page-data">
                                     { 
